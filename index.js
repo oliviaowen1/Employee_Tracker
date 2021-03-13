@@ -103,3 +103,31 @@ function viewByDept() {
             starterPrompt()
         })
 }
+
+
+
+// We use the below to allow the user to select from the list later on, it also keeps an empty array for us to push the user inputs too
+var roleArr = [];
+function selectRole() {
+    connection.query("SELECT * FROM role", function (err, res) {
+        if (err) throw err
+        for (var i = 0; i < res.length; i++) {
+            roleArr.push(res[i].title);
+        }
+
+    })
+    return roleArr;
+}
+
+// We use the below to allow the user to select from the list later on, it also keeps an empty array for us to push the user inputs too
+var managersArr = [];
+function selectManager() {
+    connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function (err, res) {
+        if (err) throw err
+        for (var i = 0; i < res.length; i++) {
+            managersArr.push(res[i].first_name);
+        }
+
+    })
+    return managersArr;
+}
