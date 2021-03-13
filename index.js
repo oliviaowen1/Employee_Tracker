@@ -175,3 +175,29 @@ function addEmployee() {
 
     })
 }
+
+
+// The function below allows the user to enter a new department name to be added
+function addDept() {
+
+    inquirer.prompt([
+        {
+            name: "name",
+            type: "input",
+            message: "What Department would you like to add?"
+        }
+    ]).then(function (res) {
+        var query = connection.query(
+            "INSERT INTO department SET ? ",
+            {
+                name: res.name
+
+            },
+            function (err) {
+                if (err) throw err
+                console.table(res);
+                starterPrompt();
+            }
+        )
+    })
+}
