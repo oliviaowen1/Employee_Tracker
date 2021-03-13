@@ -131,3 +131,47 @@ function selectManager() {
     })
     return managersArr;
 }
+
+// The below runs a function to add an employee using the info the user inputs
+function addEmployee() {
+    inquirer.prompt([
+        {
+            name: "firstName",
+            type: "input",
+            message: "Enter their first name "
+        },
+        {
+            name: "lastName",
+            type: "input",
+            message: "Enter their last name "
+        },
+        {
+            name: "role",
+            type: "list",
+            message: "What is their role? ",
+            choices: selectRole()
+        },
+        {
+            name: "choice",
+            type: "rawlist",
+            message: "Whats their managers name?",
+            choices: selectManager()
+        }
+    ]).then(function (data) {
+        var roleId = selectRole().indexOf(data.role) + 1
+        var managerId = selectManager().indexOf(data.choice) + 1
+        connection.query("INSERT INTO employee SET ?",
+            {
+                first_name: data.firstName,
+                last_name: data.lastName,
+                manager_id: managerId,
+                role_id: roleId
+
+            }, function (err) {
+                if (err) throw err
+                console.table(data)
+                starterPrompt()
+            })
+
+    })
+}
