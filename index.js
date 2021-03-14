@@ -25,7 +25,7 @@ function starterPrompt() {
     inquirer.prompt([
         {
             type: "list",
-            message: "Welcome to the Employee Tracker - What would you like to do first?",
+            message: "Welcome to the Employee Tracker - What would you like to do?",
             name: "choice",
             choices: [
                 "View All Employees",
@@ -205,87 +205,9 @@ function addDept() {
 
 
 
-// //============= Add Employee Role ==========================//
-// function addRole() {
-//     connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role", function (err, res) {
-//         inquirer.prompt([
-//             {
-//                 name: "Title",
-//                 type: "input",
-//                 message: "What is the title of the new role?"
-//             },
-//             {
-//                 name: "Salary",
-//                 type: "input",
-//                 message: "What is the Salary?"
 
-//             }
-//         ]).then(function (res) {
-//             connection.query(
-//                 "INSERT INTO role SET ?",
-//                 {
-//                     title: res.Title,
-//                     salary: res.Salary,
-//                 },
-//                 function (err) {
-//                     if (err) throw err
-//                     console.table(res);
-//                     starterPrompt();
-//                 }
-//             )
 
-//         });
-//     });
-// }
-
-// //============= Update Employee ==========================//
-// function updateEmployee() {
-//     connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", function (err, res) {
-//         // console.log(res)
-//         if (err) throw err
-//         console.log(res)
-//         inquirer.prompt([
-//             {
-//                 name: "lastName",
-//                 type: "rawlist",
-//                 choices: function () {
-//                     var lastName = [];
-//                     for (var i = 0; i < res.length; i++) {
-//                         lastName.push(res[i].last_name);
-//                     }
-//                     return lastName;
-//                 },
-//                 message: "What is the Employee's last name? ",
-//             },
-//             {
-//                 name: "role",
-//                 type: "rawlist",
-//                 message: "What is the Employees new title? ",
-//                 choices: selectRole()
-//             },
-//         ]).then(function (data) {
-//             var roleId = selectRole().indexOf(data.role) + 1
-//             connection.query("UPDATE employee SET WHERE ?",
-//                 {
-//                     last_name: data.lastName
-
-//                 },
-//                 {
-//                     role_id: roleId
-
-//                 },
-//                 function (err) {
-//                     if (err) throw err
-//                     console.table(data)
-//                     starterPrompt()
-//                 })
-
-//         });
-//     });
-
-// }
-
-// function exitApp ({
-
-    
-// })
+function exitApp (){
+console.log("Thank you for using Employee Tracker!")
+    connection.end();
+}
