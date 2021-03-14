@@ -220,7 +220,7 @@ function addRole() {
         {
             name: "salary",
             type: "input",
-            message: "What is the salary of this position? (Enter a number?)"
+            message: "What is the salary of this position? (Enter a number)"
         },
         {
             name: "deptChoice",
@@ -258,6 +258,48 @@ function addRole() {
     })
     
 }
+
+// update an employees role
+const updateEmployee = () => {
+    connection.query(
+        "SELECT * FROM employee;",
+        (err, res) => {
+            if (err) throw err;
+            console.log(res);
+            inquirer.prompt([ 
+                {
+                    type: "rawlist",
+                    message: "Please specify the employee's last name:",
+                    name: "lastName",
+                    choices: () => {
+                        var lastName = [];
+                        for (var i = 0; i < res.length; i++) {
+                            lastName.push(res[i].last_name);
+                        }
+                        return lastName;
+                    }
+                },
+                {
+                    type: "rawlist",
+                    message: "Please specify the employee's new role:",
+                    name: "role",
+                    choices: selectRole()
+                }
+            ]).then((value) => {
+                var roleId = selectRole().indexOf(value.role) + 1;
+                connection.query(`UPDATE employee SET role_id = ${roleId} WHERE last_name = ?`,
+                    [value.lastName],
+                    (err, res) => {
+                        if (err) throw err;
+                        console.log("Your employee's role has been updated!");
+                        console.table(res);
+                        starterPrompt();
+                    }
+                )
+            })
+        })
+}
+
 
 
 function exitApp (){
