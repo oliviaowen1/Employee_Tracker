@@ -205,6 +205,59 @@ function addDept() {
 
 
 
+// This function adds a new role for employees
+function addRole() {
+    connection.query("SELECT * FROM department", function(err, res) {
+    if (err) throw err;
+
+    inquirer 
+    .prompt([
+        {
+            name: "new_role",
+            type: "input", 
+            message: "What is the Title of the new role?"
+        },
+        {
+            name: "salary",
+            type: "input",
+            message: "What is the salary of this position? (Enter a number?)"
+        },
+        {
+            name: "deptChoice",
+            type: "rawlist",
+            choices: function() {
+                var deptArry = [];
+                for (let i = 0; i < res.length; i++) {
+                deptArry.push(res[i].name);
+                }
+                return deptArry;
+            },
+        }
+    ]).then(function (answer) {
+        let deptID;
+        for (let j = 0; j < res.length; j++) {
+            if (res[j].name == answer.deptChoice) {
+                deptID = res[j].id;
+            }
+        }
+
+        connection.query(
+            "INSERT INTO role SET ?",
+            {
+                title: answer.new_role,
+                salary: answer.salary,
+                department_id: deptID
+            },
+            function (err, res) {
+                if(err)throw err;
+                console.log("Your new role has been added!");
+                starterPrompt();
+            }
+        )
+    })
+    })
+    
+}
 
 
 function exitApp (){
