@@ -259,7 +259,7 @@ function addRole() {
     
 }
 
-// update an employees role
+// update an employees role 
 const updateEmployee = () => {
     connection.query(
         "SELECT * FROM employee;",
@@ -269,7 +269,7 @@ const updateEmployee = () => {
             inquirer.prompt([ 
                 {
                     type: "rawlist",
-                    message: "Please specify the employee's last name:",
+                    message: "Please select the employee's last name:",
                     name: "lastName",
                     choices: () => {
                         var lastName = [];
@@ -281,7 +281,7 @@ const updateEmployee = () => {
                 },
                 {
                     type: "rawlist",
-                    message: "Please specify the employee's new role:",
+                    message: "Please select the employee's new role:",
                     name: "role",
                     choices: selectRole()
                 }
@@ -291,7 +291,7 @@ const updateEmployee = () => {
                     [value.lastName],
                     (err, res) => {
                         if (err) throw err;
-                        console.log("Your employee's role has been updated!");
+                        console.log("The employee's role has been updated!");
                         console.table(res);
                         starterPrompt();
                     }

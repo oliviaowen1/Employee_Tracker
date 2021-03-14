@@ -38,19 +38,19 @@ VALUES ('Lawyer', 190000, 4);
 
 SELECT * FROM employee;
 INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-VALUES ('Lauren', 'Meekison', 1, null);
+VALUES ('Lora', 'Bristol', 1, null);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-VALUES ('Paul', 'Bernard-Hall', 3, null);
+VALUES ('Paul', 'Brand', 3, null);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-VALUES ('Chris', 'Nguyen', 4, 2);
+VALUES ('Elizabeth', 'Carroll', 4, 2);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id) 
 VALUES ('Chris', 'Pong', 6, null);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-VALUES ('Johnny', 'Bodenbach', 2, 1);
+VALUES ('John', 'Harrington', 2, 1);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-VALUES ('Leonard', 'Walter', 2, 1);
+VALUES ('James', 'Gordon', 2, 1);
